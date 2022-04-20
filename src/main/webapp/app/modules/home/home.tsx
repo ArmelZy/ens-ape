@@ -2,28 +2,38 @@ import './home.scss';
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Translate } from 'react-jhipster';
-import { Row, Col, Alert } from 'reactstrap';
+import {translate, Translate, ValidatedField} from 'react-jhipster';
+import {Row, Col, Alert, Button, Form} from 'reactstrap';
 
-import { useAppSelector } from 'app/config/store';
+import {useAppDispatch, useAppSelector} from 'app/config/store';
+import {useForm} from "react-hook-form";
+import {login} from "app/shared/reducers/authentication";
 
 export const Home = () => {
+  const dispatch = useAppDispatch();
   const account = useAppSelector(state => state.authentication.account);
+  const loginError = useAppSelector(state => state.authentication.loginError);
+
+  const {
+    handleSubmit,
+    register,
+    formState: { errors, touchedFields },
+  } = useForm({ mode: 'onTouched' });
+
+  const handleLogin = ({ username, password, rememberMe }) => dispatch(login(username, password, rememberMe));
+
+  const handleLoginSubmit = e => {
+    handleSubmit(handleLogin)(e);
+  };
 
   return (
-    <Row>
-      <Col md="3" className="pad">
-        <span className="hipster rounded" />
-      </Col>
-      <Col md="9">
-        <h2>
-          <Translate contentKey="home.title">Welcome, Java Hipster!</Translate>
-        </h2>
-        <p className="lead">
-          <Translate contentKey="home.subtitle">This is your homepage</Translate>
-        </p>
+    <div className="container">
+      <div className="row justify-content-center">
         {account?.login ? (
-          <div>
+          <div className="card">
+            <h2>
+              <Translate contentKey="home.title">Welcome</Translate> {account?.login? <span>{account.login}</span>:null} !
+            </h2>
             <Alert color="success">
               <Translate contentKey="home.logged.message" interpolate={{ username: account.login }}>
                 You are logged in as user {account.login}.
@@ -31,69 +41,76 @@ export const Home = () => {
             </Alert>
           </div>
         ) : (
-          <div>
-            <Alert color="warning">
-              <Translate contentKey="global.messages.info.authenticated.prefix">If you want to </Translate>
-
-              <Link to="/login" className="alert-link">
-                <Translate contentKey="global.messages.info.authenticated.link"> sign in</Translate>
-              </Link>
-              <Translate contentKey="global.messages.info.authenticated.suffix">
-                , you can try the default accounts:
-                <br />- Administrator (login=&quot;admin&quot; and password=&quot;admin&quot;)
-                <br />- User (login=&quot;user&quot; and password=&quot;user&quot;).
-              </Translate>
-            </Alert>
-
-            <Alert color="warning">
-              <Translate contentKey="global.messages.info.register.noaccount">You do not have an account yet?</Translate>&nbsp;
-              <Link to="/account/register" className="alert-link">
-                <Translate contentKey="global.messages.info.register.link">Register a new account</Translate>
-              </Link>
-            </Alert>
+          <div className="col-auto">
+            <Form id="home-login"  onSubmit={handleLoginSubmit}>
+              <div className="card bg-secondary mb-3">
+                <div id="login-title" data-cy="loginTitle" className="card-header text-center">
+                  <h3><Translate contentKey="login.title">Sign in</Translate></h3>
+                </div>
+                <div className="card-body">
+                  <Row>
+                    <Col md="12">
+                      {loginError ? (
+                        <Alert color="danger" data-cy="loginError">
+                          <Translate contentKey="login.messages.error.authentication">
+                            <strong>Failed to sign in!</strong> Please check your credentials and try again.
+                          </Translate>
+                        </Alert>
+                      ) : null}
+                    </Col>
+                    <Col md="12">
+                      <ValidatedField
+                        name="username"
+                        label={translate('global.form.username.label')}
+                        placeholder={translate('global.form.username.placeholder')}
+                        required
+                        autoFocus
+                        data-cy="username"
+                        validate={{ required: 'Username cannot be empty!' }}
+                        register={register}
+                        error={errors.username}
+                        isTouched={touchedFields.username}
+                      />
+                      <ValidatedField
+                        name="password"
+                        type="password"
+                        label={translate('login.form.password')}
+                        placeholder={translate('login.form.password.placeholder')}
+                        required
+                        data-cy="password"
+                        validate={{ required: 'Password cannot be empty!' }}
+                        register={register}
+                        error={errors.password}
+                        isTouched={touchedFields.password}
+                      />
+                      <ValidatedField
+                        name="rememberMe"
+                        type="checkbox"
+                        check
+                        label={translate('login.form.rememberme')}
+                        value={true}
+                        register={register}
+                      />
+                    </Col>
+                  </Row>
+                  <div className="mt-1">&nbsp;</div>
+                  <Alert color="warning">
+                    <Link to="/account/reset/request" data-cy="forgetYourPasswordSelector">
+                      <Translate contentKey="login.password.forgot">Did you forget your password?</Translate>
+                    </Link>
+                  </Alert>
+                </div>
+                <div className="card-footer text-muted">
+                  <Button color="primary" type="submit" data-cy="submit" block={true}>
+                    <Translate contentKey="login.form.button">Sign in</Translate>
+                  </Button>
+                </div>
+              </div>
+            </Form>
           </div>
         )}
-        <p>
-          <Translate contentKey="home.question">If you have any question on JHipster:</Translate>
-        </p>
-
-        <ul>
-          <li>
-            <a href="https://www.jhipster.tech/" target="_blank" rel="noopener noreferrer">
-              <Translate contentKey="home.link.homepage">JHipster homepage</Translate>
-            </a>
-          </li>
-          <li>
-            <a href="https://stackoverflow.com/tags/jhipster/info" target="_blank" rel="noopener noreferrer">
-              <Translate contentKey="home.link.stackoverflow">JHipster on Stack Overflow</Translate>
-            </a>
-          </li>
-          <li>
-            <a href="https://github.com/jhipster/generator-jhipster/issues?state=open" target="_blank" rel="noopener noreferrer">
-              <Translate contentKey="home.link.bugtracker">JHipster bug tracker</Translate>
-            </a>
-          </li>
-          <li>
-            <a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer">
-              <Translate contentKey="home.link.chat">JHipster public chat room</Translate>
-            </a>
-          </li>
-          <li>
-            <a href="https://twitter.com/jhipster" target="_blank" rel="noopener noreferrer">
-              <Translate contentKey="home.link.follow">follow @jhipster on Twitter</Translate>
-            </a>
-          </li>
-        </ul>
-
-        <p>
-          <Translate contentKey="home.like">If you like JHipster, do not forget to give us a star on</Translate>{' '}
-          <a href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer">
-            GitHub
-          </a>
-          !
-        </p>
-      </Col>
-    </Row>
+      </div>
+    </div>
   );
 };
 

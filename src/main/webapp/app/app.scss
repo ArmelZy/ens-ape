@@ -3,8 +3,18 @@
 // Import Bootstrap source files from node_modules
 @import '~bootstrap/scss/bootstrap';
 @import '~bootswatch/dist/flatly/bootswatch';
+
+
 body {
   margin: 0;
+  background-color: #eff2f1;
+}
+
+.dropdown-item{
+  &:hover,
+  &:focus {
+    background-color: $cyan;
+  }
 }
 
 a {
@@ -23,6 +33,11 @@ a {
 }
 
 .app-container {
+  // Custom
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  // Custom end
   box-sizing: border-box;
   .view-container {
     width: 100%;
@@ -41,7 +56,11 @@ a {
     }
   }
 }
-
+// Custom
+.content-wrap {
+  flex: 1;
+}
+// Custom end
 .fullscreen {
   position: fixed;
   top: 100px;

@@ -97,7 +97,7 @@ module.exports = async options =>
       ),
       new WebpackNotifierPlugin({
         title: 'Ape',
-        contentImage: path.join(__dirname, 'logo-jhipster.png'),
+        contentImage: path.join(__dirname, 'logo-ens.jpeg'),
       }),
     ].filter(Boolean),
   });
