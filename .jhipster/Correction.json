@@ -1,0 +1,34 @@
+{
+  "applications": "*",
+  "changelogDate": "20220420210838",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "correction",
+  "fields": [
+    {
+      "fieldName": "content",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text",
+      "fieldValidateRules": ["required"],
+      "javadoc": "content"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "The Correction entity.\\n@author APE",
+  "jpaMetamodelFiltering": false,
+  "name": "Correction",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "title",
+      "otherEntityName": "exercise",
+      "otherEntityRelationshipName": "correction",
+      "ownerSide": true,
+      "relationshipName": "exercise",
+      "relationshipType": "one-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "service": "serviceClass"
+}

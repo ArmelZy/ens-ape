@@ -1,0 +1,53 @@
+{
+  "applications": "*",
+  "changelogDate": "20220420210837",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "exercise",
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"],
+      "javadoc": "title"
+    },
+    {
+      "fieldName": "content",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text",
+      "fieldValidateRules": ["required"],
+      "javadoc": "content"
+    },
+    {
+      "fieldName": "mark",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "min"],
+      "fieldValidateRulesMin": "0",
+      "javadoc": "mark"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "The Exercise entity.\\n@author APE",
+  "jpaMetamodelFiltering": false,
+  "name": "Exercise",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "title",
+      "otherEntityName": "course",
+      "otherEntityRelationshipName": "exercise",
+      "relationshipName": "course",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "correction",
+      "otherEntityRelationshipName": "exercise",
+      "ownerSide": false,
+      "relationshipName": "correction",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

@@ -1,0 +1,44 @@
+/**
+ * The Course entity.
+ * @author APE
+ */
+entity Course {
+    /** title */
+    title String required
+    /** content */
+    content TextBlob required
+}
+/**
+ * The Exercise entity.
+ * @author APE
+ */
+entity Exercise {
+    /** title */
+    title String required
+     /** content */
+     content TextBlob required
+     /** mark */
+     mark Integer required min(0)
+}
+/**
+ * The Correction entity.
+ * @author APE
+ */
+entity Correction {
+    /** content */
+    content TextBlob required
+}
+/**
+ * Many to one relationship.
+ */
+relationship ManyToOne {
+    Exercise{course(title) required} to Course{exercise(title)}
+}
+/**
+ * One to one relationship.
+ */
+relationship OneToOne {
+    Correction{exercise(title) required} to Exercise{correction}
+}
+service * with serviceClass
+paginate * with pagination

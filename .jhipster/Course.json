@@ -1,0 +1,38 @@
+{
+  "applications": "*",
+  "changelogDate": "20220420210836",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "course",
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"],
+      "javadoc": "title"
+    },
+    {
+      "fieldName": "content",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text",
+      "fieldValidateRules": ["required"],
+      "javadoc": "content"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "The Course entity.\\n@author APE",
+  "jpaMetamodelFiltering": false,
+  "name": "Course",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "title",
+      "otherEntityName": "exercise",
+      "otherEntityRelationshipName": "course",
+      "relationshipName": "exercise",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

@@ -1,0 +1,28 @@
+{
+  "apeApp": {
+    "correction": {
+      "home": {
+        "title": "Corrections",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Correction",
+        "createOrEditLabel": "Create or edit a Correction",
+        "notFound": "No Corrections found"
+      },
+      "created": "A new Correction is created with identifier {{ param }}",
+      "updated": "A Correction is updated with identifier {{ param }}",
+      "deleted": "A Correction is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Correction {{ id }}?"
+      },
+      "detail": {
+        "title": "Correction"
+      },
+      "id": "ID",
+      "content": "Content",
+      "exercise": "Exercise",
+      "help": {
+        "content": "content"
+      }
+    }
+  }
+}
