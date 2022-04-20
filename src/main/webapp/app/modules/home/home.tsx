@@ -30,7 +30,7 @@ export const Home = () => {
     <div className="container">
       <div className="row justify-content-center">
         {account?.login ? (
-          <div className="card">
+          <div className="">
             <h2>
               <Translate contentKey="home.title">Welcome</Translate> {account?.login? <span>{account.login}</span>:null} !
             </h2>
