@@ -2,20 +2,20 @@
   "apeApp": {
     "exercise": {
       "home": {
-        "title": "Exercises",
+        "title": "Exercices",
         "refreshListLabel": "Actualiser la liste",
-        "createLabel": "Créer un nouveau Exercise",
-        "createOrEditLabel": "Créer ou éditer un Exercise",
-        "notFound": "Aucun Exercise trouvé"
+        "createLabel": "Créer un nouveau Exercice",
+        "createOrEditLabel": "Créer ou éditer un Exercice",
+        "notFound": "Aucun Exercice trouvé"
       },
-      "created": "Un nouveau Exercise a été créé avec l'identifiant {{ param }}",
-      "updated": "Le Exercise avec l'identifiant {{ param }} a été mis à jour",
-      "deleted": "Le Exercise avec l'identifiant {{ param }} a été supprimé",
+      "created": "Un nouveau Exercice a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Exercice avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Exercice avec l'identifiant {{ param }} a été supprimé",
       "delete": {
-        "question": "Êtes-vous certain de vouloir supprimer le Exercise {{ id }} ?"
+        "question": "Êtes-vous certain de vouloir supprimer le Exercice {{ id }} ?"
       },
       "detail": {
-        "title": "Exercise"
+        "title": "Exercice"
       },
       "id": "ID",
       "title": "Title",
